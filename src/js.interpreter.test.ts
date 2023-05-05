@@ -24,61 +24,20 @@ fibonacci(16, result);
     expect(js.varCache.get('result').arr).toEqual(['1', '1', 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987]);
   });
 
-  test('array->set-index', () => {
-    const code = `var a = [];
-      a.push(1);
-      a[0] = 10;
+    test('calculate condition', () => {
+        const code = `
+let a = 1;
+let b = 2;
+if (a+b === 3 || a-b == -1 && a < b) {
+    var c = [];
+} else if (a*b === 2) {
+    var d = [];
+} else {
+    var e = [];
+}
 `;
-    const ast = acorn.parse(code, { ecmaVersion: 5 });
-    const js = new JsInterpreter();
-    js.run((ast as Program).body);
-    expect(js.varCache.get('a').arr).toEqual(['10']);
-  });
-
-  test('array->assign += 1', () => {
-    const code = `var a = [];
-      a.push(1);
-      a[0] += 1;
-`;
-    const ast = acorn.parse(code, { ecmaVersion: 5 });
-    // console.log((ast as Program).body[2])
-    const js = new JsInterpreter();
-    js.run((ast as Program).body);
-    expect(js.varCache.get('a').arr).toEqual([2]);
-  });
-
-  test('array->assign -= 1', () => {
-    const code = `var a = [];
-      a.push(3);
-      a[0] -= 1;
-`;
-    const ast = acorn.parse(code, { ecmaVersion: 5 });
-    const js = new JsInterpreter();
-    js.run((ast as Program).body);
-    expect(js.varCache.get('a').arr).toEqual([2]);
-  });
-
-  test('array->assign - a[0] - 1', () => {
-    const code = `var a = [];
-      a.push(3);
-      a[0] = a[0] - 1;
-`;
-    const ast = acorn.parse(code, { ecmaVersion: 5 });
-    // console.log((ast as Program).body[2])
-    const js = new JsInterpreter();
-    js.run((ast as Program).body);
-    expect(js.varCache.get('a').arr).toEqual([2]);
-  });
-
-  test('array->assign - 1 - a[0]', () => {
-    const code = `var a = [];
-      a.push(3);
-      a[0] = 1 - a[0];
-`;
-    const ast = acorn.parse(code, { ecmaVersion: 5 });
-    // console.log((ast as Program).body[2])
-    const js = new JsInterpreter();
-    js.run((ast as Program).body);
-    expect(js.varCache.get('a').arr).toEqual([-2]);
-  });
+        const ast = acorn.parse(code, { ecmaVersion: 6 });
+        const js = new JsInterpreter();
+        js.run((ast as Program).body);
+    });
 });

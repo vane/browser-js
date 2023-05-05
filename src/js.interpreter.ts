@@ -46,6 +46,9 @@ export class JsInterpreter {
           loop.run();
           break;
         }
+        case 'IfStatement': {
+
+        }
         default: {
           console.log('Not supported JsInterpreter->run', node);
           return;

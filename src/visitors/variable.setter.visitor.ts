@@ -1,7 +1,8 @@
-import { ArrayExpression, Identifier, Literal, VariableDeclarator } from '../node-types';
+import {ArrayExpression, BinaryExpression, Identifier, Literal, VariableDeclarator} from '../node-types';
 import { ArrayDecorator } from '../decorators/array.decorator';
 import { Logger } from '../logger';
 import { VariableDecorator } from '../decorators/variable.decorator';
+import {BinaryVisitor} from "./binary.visitor";
 
 export class VariableSetterVisitor {
   static visit(v: VariableDeclarator, varCache: VariableDecorator): void {
@@ -20,8 +21,12 @@ export class VariableSetterVisitor {
           value = (v.init as Literal).raw;
           break;
         }
+        case 'BinaryExpression': {
+          value = BinaryVisitor.visit(v.init as BinaryExpression, varCache);
+          break;
+        }
         default: {
-          console.log('not supported VariableDecorator->setValue', value);
+          console.log('not supported VariableSetterVisitor->visit->', value, v);
         }
       }
     }

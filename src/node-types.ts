@@ -1,10 +1,12 @@
 import { Node } from 'acorn';
 
 export type Expression = CallExpression | AssignmentExpression;
-export type VariableValue = ArrayExpression | Literal | Identifier | BinaryExpression;
+export type VariableValue = ArrayExpression | Literal | Identifier | BinaryExpression | MemberExpression;
 export type Callee = Identifier | MemberExpression;
 export type Assignment = Identifier | MemberExpression | Literal;
 export type MemberProperty = Identifier | Literal;
+export type LogicalExpression = BinaryExpression;
+export type AssignmentExpression = BinaryExpression;
 
 export interface Program extends Node {
   body: Node[];
@@ -48,12 +50,6 @@ export interface BinaryExpression extends Node {
   right: Assignment;
 }
 
-export interface AssignmentExpression extends Node {
-  left: Assignment;
-  operator: string;
-  right: Identifier;
-}
-
 export interface UpdateExpression extends Node {
   prefix: boolean;
   operator: string;
@@ -86,4 +82,10 @@ export interface ForStatement extends Node {
   test: BinaryExpression;
   update: UpdateExpression;
   body: BlockStatement;
+}
+
+export interface IfStatement extends Node {
+  test: LogicalExpression;
+  consequent: BlockStatement;
+  alternate: BlockStatement;
 }
