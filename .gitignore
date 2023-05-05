@@ -1,0 +1,8 @@
+# directories
+.parcel-cache
+node_modules
+dist
+tmp
+
+# mac
+.DS_Store

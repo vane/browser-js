@@ -1,0 +1,44 @@
+{
+  "name": "@szczepano/browser-js",
+  "version": "0.0.1",
+  "private": true,
+  "description": "javascript run in javascript using acorn",
+  "source": "src/index.ts",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "parcel build",
+    "build:html": "parcel build test/index.html --target html",
+    "lint": "eslint --ext .ts,.tsx  src/",
+    "lint:fix": "eslint --ext .ts,.tsx  src/ --fix",
+    "test": "jest"
+  },
+  "targets": {
+    "html": {
+      "distDir": "dist/html"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vane/browser-js.git"
+  },
+  "author": "Michal Szczepanski",
+  "license": "MIT",
+  "devDependencies": {
+    "@parcel/packager-ts": "^2.8.3",
+    "@parcel/transformer-typescript-tsc": "^2.8.3",
+    "@parcel/transformer-typescript-types": "^2.8.3",
+    "@types/jest": "^29.5.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.2",
+    "@typescript-eslint/parser": "^5.59.2",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "parcel": "^2.8.3",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "acorn": "^8.8.2"
+  }
+}
