@@ -8,7 +8,7 @@ export class LoopDecorator {
   constructor(private loop: ForStatement, private ctx: JsInterpreter) {}
 
   run() {
-    Logger.debug('LoopDecorator->start');
+    Logger.debug('LoopDecorator->start', this.loop.init);
     const js = new JsInterpreter(this.loop.type, this.ctx, this.loop.init);
     let i = 0;
     while (BinaryVisitor.visit(this.loop.test, js.varCache)) {

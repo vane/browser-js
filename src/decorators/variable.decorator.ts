@@ -19,7 +19,9 @@ export class VariableDecorator {
   refresh(cache: VariableDecorator) {
     const keys = Object.keys(cache.vars);
     for (const key of keys) {
-      if (this.vars[key]) this.vars[key] = cache.vars[key];
+      if (key in this.vars) {
+        this.vars[key] = cache.vars[key];
+      }
     }
   }
 }
