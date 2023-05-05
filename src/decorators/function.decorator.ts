@@ -16,8 +16,9 @@ export class FunctionDecorator {
     Logger.debug('FunctionDecorator->run->start', runParams);
     const js = new JsInterpreter(this.name, this.ctx);
     const cache = this.toParams(js.varCache, runParams);
-    js.run(this.block.body, cache);
-    Logger.debug('FunctionDecorator->run->end');
+    const returnValue = js.run(this.block.body, cache);
+    Logger.debug('FunctionDecorator->run->end->return', returnValue);
+    return returnValue;
   }
 
   private toParams(varCache: VariableDecorator, runParams?: Node[]) {

@@ -1,8 +1,7 @@
 import { BinaryVisitor } from '../visitors/binary.visitor';
-import {DoWhileStatement, ForStatement, WhileStatement} from '../node-types';
+import { DoWhileStatement } from '../node-types';
 import { JsInterpreter } from '../js.interpreter';
 import { Logger } from '../logger';
-import { UpdateVisitor } from '../visitors/update.visitor';
 
 export class LoopDoWhileDecorator {
   constructor(private loop: DoWhileStatement, private ctx: JsInterpreter) {}
@@ -14,7 +13,7 @@ export class LoopDoWhileDecorator {
     do {
       js.run(this.loop.body.body);
       i++;
-    } while (BinaryVisitor.visit(this.loop.test, js.varCache))
+    } while (BinaryVisitor.visit(this.loop.test, js.varCache));
     Logger.debug('LoopDoWhileDecorator->end->iterations', i);
   }
 }

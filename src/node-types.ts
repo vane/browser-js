@@ -1,7 +1,13 @@
 import { Node } from 'acorn';
 
 export type Expression = CallExpression | AssignmentExpression | UpdateExpression;
-export type VariableValue = ArrayExpression | Literal | Identifier | BinaryExpression | MemberExpression;
+export type VariableValue =
+  | ArrayExpression
+  | Literal
+  | Identifier
+  | BinaryExpression
+  | MemberExpression
+  | CallExpression;
 export type Callee = Identifier | MemberExpression;
 export type Assignment = Identifier | MemberExpression | Literal | LogicalExpression;
 export type Binary = Identifier | MemberExpression | Literal | LogicalExpression | UnaryExpression;
@@ -111,4 +117,8 @@ export interface IfStatement extends Node {
   test: LogicalExpression;
   consequent: BlockStatement;
   alternate?: AlternateCondition;
+}
+
+export interface ReturnStatement extends Node {
+  argument: BinaryExpression;
 }

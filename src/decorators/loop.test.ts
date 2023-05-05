@@ -3,21 +3,21 @@ import { Program } from '../node-types';
 import acorn from 'acorn';
 
 describe('loop.test', () => {
-    test('loop for', () => {
-        const code = `
+  test('loop for', () => {
+    const code = `
 let a = 0;
 for (let i = 0;i<10;i++) {
  a += i;
 }
 `;
-        const ast = acorn.parse(code, { ecmaVersion: 6 });
-        const js = new JsInterpreter();
-        js.run((ast as Program).body);
-        expect(js.varCache.get('a')).toEqual(45)
-    });
+    const ast = acorn.parse(code, { ecmaVersion: 6 });
+    const js = new JsInterpreter();
+    js.run((ast as Program).body);
+    expect(js.varCache.get('a')).toEqual(45);
+  });
 
-    test('loop while', () => {
-        const code = `
+  test('loop while', () => {
+    const code = `
 let a = 0;
 let i = 0;
 while (i < 10) {
@@ -25,23 +25,23 @@ while (i < 10) {
     i++;
 }
 `;
-        const ast = acorn.parse(code, { ecmaVersion: 6 });
-        const js = new JsInterpreter();
-        js.run((ast as Program).body);
-        expect(js.varCache.get('a')).toEqual(45)
-    });
+    const ast = acorn.parse(code, { ecmaVersion: 6 });
+    const js = new JsInterpreter();
+    js.run((ast as Program).body);
+    expect(js.varCache.get('a')).toEqual(45);
+  });
 
-    test('loop do->while', () => {
-        const code = `
+  test('loop do->while', () => {
+    const code = `
 let a = 0;
 let i = 10;
 do {
  a += i
 } while (i === 0)
 `;
-        const ast = acorn.parse(code, { ecmaVersion: 6 });
-        const js = new JsInterpreter();
-        js.run((ast as Program).body);
-        expect(js.varCache.get('a')).toEqual(10)
-    });
+    const ast = acorn.parse(code, { ecmaVersion: 6 });
+    const js = new JsInterpreter();
+    js.run((ast as Program).body);
+    expect(js.varCache.get('a')).toEqual(10);
+  });
 });

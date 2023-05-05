@@ -1,15 +1,8 @@
-import {
-  Binary,
-  BinaryExpression,
-  Identifier,
-  Literal,
-  MemberExpression,
-  UnaryExpression
-} from '../node-types';
+import { Binary, BinaryExpression, Identifier, Literal, MemberExpression, UnaryExpression } from '../node-types';
 import { ArrayIndexVisitor } from './array.index.visitor';
 import { Logger } from '../logger';
+import { UnaryVisitor } from './unary.visitor';
 import { VariableDecorator } from '../decorators/variable.decorator';
-import {UnaryVisitor} from "./unary.visitor";
 
 export class BinaryVisitor {
   static visit(exp: BinaryExpression, varCache: VariableDecorator): boolean | number {
@@ -24,7 +17,8 @@ export class BinaryVisitor {
     switch (assignment.type) {
       case 'Identifier': {
         return varCache.get((assignment as Identifier).name);
-      } case 'Literal': {
+      }
+      case 'Literal': {
         return (assignment as Literal).raw;
       }
       case 'MemberExpression': {

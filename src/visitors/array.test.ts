@@ -3,7 +3,6 @@ import { Program } from '../node-types';
 import acorn from 'acorn';
 
 describe('array.test', () => {
-
   test('array->set-index', () => {
     const code = `var a = [];
       a.push(1);

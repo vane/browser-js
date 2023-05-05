@@ -1,5 +1,5 @@
-import {ArrayExpression, BinaryExpression, Identifier, Literal, MemberExpression, VariableValue} from '../node-types';
-import {ArrayIndexVisitor} from "./array.index.visitor";
+import { ArrayExpression, BinaryExpression, Identifier, Literal, MemberExpression, VariableValue } from '../node-types';
+import { ArrayIndexVisitor } from './array.index.visitor';
 import { BinaryVisitor } from './binary.visitor';
 import { VariableDecorator } from '../decorators/variable.decorator';
 
