@@ -74,10 +74,8 @@ export class BinaryVisitor {
       case '&&': {
         return leftValue && rightValue;
       }
-      default: {
-        console.log('not supported BinaryVisitor->identifierLeftRight->operator', operator);
-      }
     }
+    console.log('not supported BinaryVisitor->getAssignmentValue->operator', operator);
     return false;
   }
 }
