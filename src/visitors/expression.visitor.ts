@@ -5,7 +5,7 @@ import {
   Expression,
   Identifier,
   MemberExpression,
-  VariableValue
+  VariableValue, UpdateExpression
 } from '../node-types';
 import { AssignmentVisitor } from './assignment.visitor';
 import { FunctionDecorator } from '../decorators/function.decorator';
@@ -13,21 +13,26 @@ import { Logger } from '../logger';
 import { Node } from 'acorn';
 import { VariableDecorator } from '../decorators/variable.decorator';
 import { VariableGetterVisitor } from './variable.getter.visitor';
+import {UpdateVisitor} from "./update.visitor";
 
 export class ExpressionVisitor {
-  static visit(expression: Expression, varCache: VariableDecorator) {
-    switch (expression.type) {
+  static visit(exp: Expression, varCache: VariableDecorator) {
+    switch (exp.type) {
       case 'CallExpression': {
-        const n = expression as CallExpression;
+        const n = exp as CallExpression;
         this.calleeResolve(n.callee, n.arguments, varCache);
         break;
       }
       case 'AssignmentExpression': {
-        AssignmentVisitor.visit(expression as AssignmentExpression, varCache);
+        AssignmentVisitor.visit(exp as AssignmentExpression, varCache);
+        break;
+      }
+      case 'UpdateExpression': {
+        UpdateVisitor.visit(exp as UpdateExpression, varCache);
         break;
       }
       default: {
-        console.log('Not supported ExpressionVisitor->resolve', expression);
+        console.log('not supported ExpressionVisitor->resolve', exp);
         return;
       }
     }

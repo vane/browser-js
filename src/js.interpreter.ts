@@ -1,12 +1,20 @@
-import {ExpressionStatement, ForStatement, FunctionDeclaration, IfStatement, VariableDeclaration} from './node-types';
+import {
+  ExpressionStatement,
+  ForStatement,
+  FunctionDeclaration,
+  IfStatement,
+  VariableDeclaration,
+  WhileStatement
+} from './node-types';
 import { ExpressionVisitor } from './visitors/expression.visitor';
 import { FunctionDecorator } from './decorators/function.decorator';
 import { Logger } from './logger';
-import { LoopDecorator } from './decorators/loop.decorator';
+import { LoopForDecorator } from './decorators/loop.for.decorator';
 import { Node } from 'acorn';
 import { VariableDecorator } from './decorators/variable.decorator';
 import { VariableSetterVisitor } from './visitors/variable.setter.visitor';
 import {ConditionDecorator} from "./decorators/condition.decorator";
+import {LoopWhileDecorator} from "./decorators/loop.while.decorator";
 
 export class JsInterpreter {
   readonly varCache = new VariableDecorator();
@@ -43,7 +51,12 @@ export class JsInterpreter {
           break;
         }
         case 'ForStatement': {
-          const loop = new LoopDecorator(node as ForStatement, this);
+          const loop = new LoopForDecorator(node as ForStatement, this);
+          loop.run();
+          break;
+        }
+        case 'WhileStatement': {
+          const loop = new LoopWhileDecorator(node as WhileStatement, this)
           loop.run();
           break;
         }
@@ -53,7 +66,7 @@ export class JsInterpreter {
           break;
         }
         default: {
-          console.log('Not supported JsInterpreter->run', node);
+          console.log('not supported JsInterpreter->run', node);
           return;
         }
       }

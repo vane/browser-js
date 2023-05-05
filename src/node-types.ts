@@ -1,6 +1,6 @@
 import { Node } from 'acorn';
 
-export type Expression = CallExpression | AssignmentExpression;
+export type Expression = CallExpression | AssignmentExpression | UpdateExpression;
 export type VariableValue = ArrayExpression | Literal | Identifier | BinaryExpression | MemberExpression;
 export type Callee = Identifier | MemberExpression;
 export type Assignment = Identifier | MemberExpression | Literal | LogicalExpression;
@@ -93,6 +93,11 @@ export interface ForStatement extends Node {
   init: VariableDeclaration;
   test: BinaryExpression;
   update: UpdateExpression;
+  body: BlockStatement;
+}
+
+export interface WhileStatement extends Node {
+  test: BinaryExpression;
   body: BlockStatement;
 }
 

@@ -5,7 +5,7 @@ export { ExpressionVisitor } from './visitors/expression.visitor';
 export { FunctionDecorator } from './decorators/function.decorator';
 export { JsInterpreter } from './js.interpreter';
 export { Logger } from './logger';
-export { LoopDecorator } from './decorators/loop.decorator';
+export { LoopForDecorator } from './decorators/loop.for.decorator';
 export { UpdateVisitor } from './visitors/update.visitor';
 export { VariableDecorator } from './decorators/variable.decorator';
 export { VariableVisitor } from './visitors/variable.visitor';

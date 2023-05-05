@@ -9,6 +9,11 @@ export class UpdateVisitor {
         varCache.set(exp.argument.name, v + 1);
         break;
       }
+      case '--': {
+        const v = parseInt(varCache.get(exp.argument.name));
+        varCache.set(exp.argument.name, v - 1);
+        break;
+      }
       default: {
         console.log('not supported UpdateVisitor->update', exp);
       }
