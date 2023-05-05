@@ -2,8 +2,8 @@ import { ArrayExpression, BinaryExpression, Identifier, Literal, VariableValue }
 import { BinaryVisitor } from './binary.visitor';
 import { VariableDecorator } from '../decorators/variable.decorator';
 
-export class VariableVisitor {
-  static getValue(value: VariableValue, varCache?: VariableDecorator) {
+export class VariableGetterVisitor {
+  static visit(value: VariableValue, varCache?: VariableDecorator) {
     switch (value.type) {
       case 'ArrayExpression': {
         return (value as ArrayExpression).elements;
@@ -23,7 +23,7 @@ export class VariableVisitor {
           console.log('VariableVisitor->error, no varCache variable', value);
           return undefined;
         }
-        return BinaryVisitor.resolve(value as BinaryExpression, varCache);
+        return BinaryVisitor.visit(value as BinaryExpression, varCache);
       }
       default: {
         console.log('not supported VariableDecorator->getValue', value);

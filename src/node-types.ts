@@ -3,6 +3,8 @@ import { Node } from 'acorn';
 export type Expression = CallExpression | AssignmentExpression;
 export type VariableValue = ArrayExpression | Literal | Identifier | BinaryExpression;
 export type Callee = Identifier | MemberExpression;
+export type Assignment = Identifier | MemberExpression | Literal;
+export type MemberProperty = Identifier | Literal;
 
 export interface Program extends Node {
   body: Node[];
@@ -21,7 +23,7 @@ export interface Literal extends Node {
 
 export interface VariableDeclarator extends Node {
   id: Identifier;
-  init: VariableValue;
+  init?: VariableValue;
 }
 
 export interface VariableDeclaration extends Node {
@@ -41,11 +43,16 @@ export interface ArrayExpression extends Node {
 }
 
 export interface BinaryExpression extends Node {
-  left: Identifier;
+  left: Assignment;
+  operator: string;
+  right: Assignment;
+}
+
+export interface AssignmentExpression extends Node {
+  left: Assignment;
   operator: string;
   right: Identifier;
 }
-export type AssignmentExpression = BinaryExpression;
 
 export interface UpdateExpression extends Node {
   prefix: boolean;
@@ -60,7 +67,7 @@ export interface CallExpression extends Node {
 
 export interface MemberExpression extends Node {
   object: Identifier;
-  property: Identifier;
+  property: MemberProperty;
   computed: boolean;
 }
 

@@ -5,7 +5,7 @@ import { Logger } from './logger';
 import { LoopDecorator } from './decorators/loop.decorator';
 import { Node } from 'acorn';
 import { VariableDecorator } from './decorators/variable.decorator';
-import { VariableVisitor } from './visitors/variable.visitor';
+import { VariableSetterVisitor } from './visitors/variable.setter.visitor';
 
 export class JsInterpreter {
   readonly varCache = new VariableDecorator();
@@ -38,7 +38,7 @@ export class JsInterpreter {
         }
         case 'ExpressionStatement': {
           const n = node as ExpressionStatement;
-          ExpressionVisitor.resolve(n.expression, this.varCache);
+          ExpressionVisitor.visit(n.expression, this.varCache);
           break;
         }
         case 'ForStatement': {
@@ -56,9 +56,7 @@ export class JsInterpreter {
 
   private addVariables(n: VariableDeclaration): void {
     for (const v of n.declarations) {
-      const value = v.init ? VariableVisitor.getValue(v.init, this.varCache) : undefined;
-      Logger.debug('JsInterpreter->addVariables', v.id.name, value);
-      this.varCache.set(v.id.name, value);
+      VariableSetterVisitor.visit(v, this.varCache);
     }
   }
 }

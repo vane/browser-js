@@ -1,5 +1,7 @@
 export class ArrayDecorator {
-  private readonly arr: any[];
+  readonly __type__ = 'array';
+
+  readonly arr: any[];
 
   constructor(value?: any[]) {
     this.arr = value || [];
@@ -7,10 +9,6 @@ export class ArrayDecorator {
 
   get length(): number {
     return this.arr.length;
-  }
-
-  getElementIndex(i: number) {
-    return this.arr[i];
   }
 
   pop(): any {
