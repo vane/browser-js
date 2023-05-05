@@ -15,7 +15,8 @@
   },
   "targets": {
     "html": {
-      "distDir": "dist/html"
+      "distDir": "docs",
+      "sourceMap": false
     }
   },
   "repository": {
