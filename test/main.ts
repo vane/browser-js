@@ -13,7 +13,8 @@ class ConsoleDecorator {
 document.getElementById('run-btn').addEventListener('click', () => {
     log.innerHTML = '';
     const code = (document.getElementById('code') as HTMLTextAreaElement).value;
-    const ast = acorn.parse(code, { ecmaVersion: 5 });
+    const ast = acorn.parse(code, { ecmaVersion: 6 });
+    console.log(ast);
     const js = new JsInterpreter();
     js.varCache.set('console', new ConsoleDecorator());
     js.run((ast as Program).body);

@@ -31,6 +31,7 @@ export interface VariableDeclarator extends Node {
 
 export interface VariableDeclaration extends Node {
   declarations: VariableDeclarator[];
+  kind?: 'const' | 'var' | 'let';
 }
 
 export interface FunctionDeclaration extends Node {
