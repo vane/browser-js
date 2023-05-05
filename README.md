@@ -3,7 +3,7 @@
 ### Description
 javascript interpreter in javascript - poc  
 I saw that [JS-Interpreter](https://github.com/NeilFraser/JS-Interpreter) is single file so grabbed example fibonacci 
-and wrote [arcon](https://github.com/acornjs/acorn) parser from scratch.
+and wrote [acorn](https://github.com/acornjs/acorn) parser from scratch.
 
 ### Run in browser
 visit page [https://vane.github.io/browser-js/](https://vane.github.io/browser-js/)
