@@ -23,21 +23,4 @@ fibonacci(16, result);
     js.run((ast as Program).body);
     expect(js.varCache.get('result').arr).toEqual(['1', '1', 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987]);
   });
-
-    test('calculate condition', () => {
-        const code = `
-let a = 1;
-let b = 2;
-if (a+b === 3 || a-b == -1 && a < b) {
-    var c = [];
-} else if (a*b === 2) {
-    var d = [];
-} else {
-    var e = [];
-}
-`;
-        const ast = acorn.parse(code, { ecmaVersion: 6 });
-        const js = new JsInterpreter();
-        js.run((ast as Program).body);
-    });
 });

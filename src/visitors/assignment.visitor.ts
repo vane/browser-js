@@ -1,4 +1,4 @@
-import { Assignment, AssignmentExpression, Identifier, MemberExpression } from '../node-types';
+import {Assignment, AssignmentExpression, Identifier, MemberExpression, UnaryExpression} from '../node-types';
 import { MemberVisitor } from './member.visitor';
 import { VariableDecorator } from '../decorators/variable.decorator';
 import { VariableGetterVisitor } from './variable.getter.visitor';

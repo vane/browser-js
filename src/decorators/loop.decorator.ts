@@ -5,7 +5,7 @@ import { Logger } from '../logger';
 import { UpdateVisitor } from '../visitors/update.visitor';
 
 export class LoopDecorator {
-  constructor(private loop: ForStatement, private ctx?: JsInterpreter) {}
+  constructor(private loop: ForStatement, private ctx: JsInterpreter) {}
 
   run() {
     Logger.debug('LoopDecorator->start');

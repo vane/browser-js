@@ -1,4 +1,4 @@
-import { ExpressionStatement, ForStatement, FunctionDeclaration, VariableDeclaration } from './node-types';
+import {ExpressionStatement, ForStatement, FunctionDeclaration, IfStatement, VariableDeclaration} from './node-types';
 import { ExpressionVisitor } from './visitors/expression.visitor';
 import { FunctionDecorator } from './decorators/function.decorator';
 import { Logger } from './logger';
@@ -6,6 +6,7 @@ import { LoopDecorator } from './decorators/loop.decorator';
 import { Node } from 'acorn';
 import { VariableDecorator } from './decorators/variable.decorator';
 import { VariableSetterVisitor } from './visitors/variable.setter.visitor';
+import {ConditionDecorator} from "./decorators/condition.decorator";
 
 export class JsInterpreter {
   readonly varCache = new VariableDecorator();
@@ -47,7 +48,9 @@ export class JsInterpreter {
           break;
         }
         case 'IfStatement': {
-
+          const condition = new ConditionDecorator(node as IfStatement, this);
+          condition.run();
+          break;
         }
         default: {
           console.log('Not supported JsInterpreter->run', node);
@@ -55,6 +58,8 @@ export class JsInterpreter {
         }
       }
     }
+    // update modified variables up to ctx
+    this.ctx?.varCache.refresh(this.varCache);
   }
 
   private addVariables(n: VariableDeclaration): void {

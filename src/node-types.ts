@@ -3,10 +3,11 @@ import { Node } from 'acorn';
 export type Expression = CallExpression | AssignmentExpression;
 export type VariableValue = ArrayExpression | Literal | Identifier | BinaryExpression | MemberExpression;
 export type Callee = Identifier | MemberExpression;
-export type Assignment = Identifier | MemberExpression | Literal;
+export type Assignment = Identifier | MemberExpression | Literal | LogicalExpression;
+export type Binary = Identifier | MemberExpression | Literal | LogicalExpression | UnaryExpression;
 export type MemberProperty = Identifier | Literal;
 export type LogicalExpression = BinaryExpression;
-export type AssignmentExpression = BinaryExpression;
+export type AlternateCondition = BlockStatement | IfStatement;
 
 export interface Program extends Node {
   body: Node[];
@@ -44,10 +45,16 @@ export interface ArrayExpression extends Node {
   elements: [];
 }
 
-export interface BinaryExpression extends Node {
+export interface AssignmentExpression extends Node {
   left: Assignment;
   operator: string;
   right: Assignment;
+}
+
+export interface BinaryExpression extends Node {
+  left: Binary;
+  operator: string;
+  right: Binary;
 }
 
 export interface UpdateExpression extends Node {
@@ -65,6 +72,11 @@ export interface MemberExpression extends Node {
   object: Identifier;
   property: MemberProperty;
   computed: boolean;
+}
+
+export interface UnaryExpression extends Node {
+  operator: string;
+  argument: MemberProperty;
 }
 
 // --- Statement ---
@@ -87,5 +99,5 @@ export interface ForStatement extends Node {
 export interface IfStatement extends Node {
   test: LogicalExpression;
   consequent: BlockStatement;
-  alternate: BlockStatement;
+  alternate?: AlternateCondition;
 }
