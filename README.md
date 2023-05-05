@@ -5,6 +5,9 @@ javascript interpreter in javascript - poc
 I saw that [JS-Interpreter](https://github.com/NeilFraser/JS-Interpreter) is single file so grabbed example fibonacci 
 and wrote [arcon](https://github.com/acornjs/acorn) parser from scratch.
 
+### Run in browser
+visit page [https://vane.github.io/browser-js/](https://vane.github.io/browser-js/)
+
 ### Basic tests
 ```bash
 npm run test
@@ -25,18 +28,12 @@ Time:        1.336 s, estimated 2 s
 Ran all test suites.
 ```
 
-### Example that runs in browser with custom global function
+### Build docs
 ```bash
 npm run build:html
-```
-code is generated in dist/html
-```bash
-cd dist/html
-python3 -m http.server 
-```
-open [http://localhost:8000](http://localhost:8000)
+``` 
 
-### to enable debug log - change
+### Enable debug log
 ```bash
 Constraints.IS_DEBUG = true
 ```
