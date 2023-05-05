@@ -68,6 +68,9 @@ export class BinaryVisitor {
       case '===': {
         return isNaN(leftValue) ? leftValue === rightValue : parseFloat(leftValue) === parseFloat(rightValue);
       }
+      case '!==': {
+        return isNaN(leftValue) ? leftValue !== rightValue : parseFloat(leftValue) !== parseFloat(rightValue);
+      }
       case '==': {
         return leftValue === rightValue;
       }

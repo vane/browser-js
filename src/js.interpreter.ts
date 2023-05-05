@@ -1,4 +1,5 @@
 import {
+  DoWhileStatement,
   ExpressionStatement,
   ForStatement,
   FunctionDeclaration,
@@ -15,6 +16,7 @@ import { VariableDecorator } from './decorators/variable.decorator';
 import { VariableSetterVisitor } from './visitors/variable.setter.visitor';
 import {ConditionDecorator} from "./decorators/condition.decorator";
 import {LoopWhileDecorator} from "./decorators/loop.while.decorator";
+import {LoopDoWhileDecorator} from "./decorators/loop.do.while.decorator";
 
 export class JsInterpreter {
   readonly varCache = new VariableDecorator();
@@ -57,6 +59,11 @@ export class JsInterpreter {
         }
         case 'WhileStatement': {
           const loop = new LoopWhileDecorator(node as WhileStatement, this)
+          loop.run();
+          break;
+        }
+        case 'DoWhileStatement': {
+          const loop = new LoopDoWhileDecorator(node as DoWhileStatement, this)
           loop.run();
           break;
         }

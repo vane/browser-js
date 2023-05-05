@@ -3,7 +3,6 @@ import { Program } from '../node-types';
 import acorn from 'acorn';
 
 describe('loop.test', () => {
-
     test('loop for', () => {
         const code = `
 let a = 0;
@@ -16,7 +15,6 @@ for (let i = 0;i<10;i++) {
         js.run((ast as Program).body);
         expect(js.varCache.get('a')).toEqual(45)
     });
-
 
     test('loop while', () => {
         const code = `
@@ -31,5 +29,19 @@ while (i < 10) {
         const js = new JsInterpreter();
         js.run((ast as Program).body);
         expect(js.varCache.get('a')).toEqual(45)
+    });
+
+    test('loop do->while', () => {
+        const code = `
+let a = 0;
+let i = 10;
+do {
+ a += i
+} while (i === 0)
+`;
+        const ast = acorn.parse(code, { ecmaVersion: 6 });
+        const js = new JsInterpreter();
+        js.run((ast as Program).body);
+        expect(js.varCache.get('a')).toEqual(10)
     });
 });

@@ -101,6 +101,11 @@ export interface WhileStatement extends Node {
   body: BlockStatement;
 }
 
+export interface DoWhileStatement extends Node {
+  test: BinaryExpression;
+  body: BlockStatement;
+}
+
 export interface IfStatement extends Node {
   test: LogicalExpression;
   consequent: BlockStatement;
